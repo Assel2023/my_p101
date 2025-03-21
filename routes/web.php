@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OffersController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('offers',[OffersController::class,'get_offers']);
+
+Route::group(['prefix'=>'offers'],function(){
+    // Route::get('store',[OffersController::class,'store']);
+
+    Route::get('create',[OffersController::class,'show_form']);
+    Route::post('store',[OffersController::class,'store'])->name('offers.store');
+    Route::get('all',[OffersController::class,'index']);
 });
